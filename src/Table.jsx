@@ -984,7 +984,8 @@ class Table extends React.Component {
 
     me.updateRecord(objAux, () => {
       const stateData = deepcopy(me.state.data.data || me.state.data.datas);
-      objAux.forEach((item) => {
+      const objs = objAux.length ? objAux : [objAux];
+      objs.forEach((item) => {
         for (let i = 0; i < stateData.length; i++) {
           const element = stateData[i];
           if (element.jsxid === item.jsxid) {
