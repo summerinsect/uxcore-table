@@ -51,7 +51,26 @@ const getRowTreeSet = (rowData) => {
         }
     }
 }
-
+const treeForEach = function treeForEach(treeObj, func) {
+    if (treeObj instanceof Array) {
+        if (treeObj.some(function (item) {
+            return treeForEach(item, func);
+        })) {
+            return true;
+        }
+    } else {
+        if (func(treeObj)) {
+            return true;
+        };
+        if (treeObj.hasOwnProperty('data') || treeObj.hasOwnProperty('datas')) {
+            const data = treeObj.data || treeObj.datas;
+            if (treeForEach(data, func)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 module.exports = {
     getIEVer: () => {
         if (window) {
@@ -81,5 +100,6 @@ module.exports = {
     },
     changeValueR: changeValueR,
     isRowHalfChecked: isRowHalfChecked,
-    getAllSelectedRows: getAllSelectedRows
+    getAllSelectedRows: getAllSelectedRows,
+    treeForEach: treeForEach,
 }

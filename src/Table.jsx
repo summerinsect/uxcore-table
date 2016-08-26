@@ -951,12 +951,17 @@ class Table extends React.Component {
     if (stateData.data || stateData.datas) {
       const data = stateData.data || stateData.datas;
       objAux.forEach((item) => {
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].jsxid === item.jsxid) {
-            data[i] = item;
-            break;
-          }
-        }
+        util.treeForEach(data, function(child) {
+            if (child.jsxid === item.jsxid) {
+              for(var p in item) {
+                var name=p;//属性名称
+                var value=item[p];//属性对应的值
+                child[name]=item[p];
+              } 
+              return true;
+            }
+            return false;
+        });
       });
       if (stateData.data) {
         stateData.data = data;

@@ -18,8 +18,10 @@ class Row extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            expanded: (this.props.level < this.props.levels) ? true : false
-        }
+            expanded: (this.props.level < this.props.levels) ? true : false,
+        };
+        this.evTimeStamp = 0;
+        this.first = true;
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -51,7 +53,7 @@ class Row extends React.Component {
         let me = this;
     }
 
-    handleDoubleClick(rowData) {
+    handleDoubleClick(event,rowData) {
         let table = this.props.root;
         if (table.props.doubleClickToEdit) {
             table.editRow(deepcopy(rowData));
@@ -232,7 +234,7 @@ class Row extends React.Component {
                 last: this.props.last,
             })} style={_style}
             onClick={this.handleClick.bind(this, props.rowData)}
-            onDoubleClick={this.handleDoubleClick.bind(this, props.rowData)}>
+            onDoubleClickCapture={this.handleDoubleClick.bind(this, event, props.rowData)}>
                 <div className={`${this.props.prefixCls}-cells`}>
                     {_columns.map(function(item, index) {
                         const rowSelectorInTreeMode = (['checkboxSelector', 'radioSelector'].indexOf(item.type) !== -1) && (props.renderModel == 'tree');
