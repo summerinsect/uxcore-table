@@ -81,6 +81,7 @@ $ gulp server
 |onPagerChange       |function(current, pageSize) | optional | noop | 1.6.1   |未配置 fetchUrl 的情况下触发，传回要到达的分页和每页条数|
 |addRowClassName     |function(rowData)   |optional  |noop        | -         |用于为特定的某几行添加特殊的 class，用于样式定制|
 |rowSelection        |object              |optional  |noop        | -         |选中复选框时触发的回调，rowSelection 是由回调函数组成的对象，包括 onSelect 和 onSelectAll，例子见此| 
+|root            |object              |optional  |""          | -         |传入对象(比如this),实现table和父组件通信(如果要获取折叠展开的点击事件，就必须传入)|
 
 
 ### 折叠展开专用
@@ -310,6 +311,10 @@ actions: [
     }
 ]
 ```
+### 回调的方法(如果要用，传props时必须传root)
+|Name            |parameter    |Since Ver. |Note |
+|---             |---          |---        |---|
+|handleExpand    |rowData          |---        |折叠展开的点击事件|
 
 ### 对于多行的支持
 

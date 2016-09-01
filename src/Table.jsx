@@ -1124,6 +1124,7 @@ class Table extends React.Component {
     this.setState({
       expandedKeys,
     });
+    this.props.root.handleExpand(rowData);
   }
 
 }
